@@ -109,7 +109,7 @@ export function AdminConsole({
             {publishers.length === 0 ? (
               <div className="empty-state">No publishers approved yet.</div>
             ) : (
-              publishers.map((publisher) => (
+              publishers.map((publisher: PublisherRecord) => (
                 <article key={publisher.walletAddress} className="timeline-card panel">
                   <div className="pill-row">
                     <span className={`pill ${publisher.status === "APPROVED" ? "ok" : "warn"}`}>{publisher.status}</span>

@@ -92,7 +92,7 @@ export function VerifyClient({
           Try a known article
         </h2>
         <div className="card-grid">
-          {initialResults.map((entry) => (
+          {initialResults.map((entry: VerificationPayload) => (
             <article key={`${entry.articleId}-${entry.chainHash ?? "none"}`} className="panel utility-card">
               <div className="pill-row">
                 <span className={`pill ${entry.status === "verified" ? "ok" : "warn"}`}>{entry.status}</span>

@@ -19,9 +19,10 @@ export default async function VerifyPage({
     },
     take: 3
   });
+  type VerifyArticle = (typeof latest)[number];
 
   const initialResults = await Promise.all(
-    latest.map((article) => verifyArticleByIdOrSlug(article.slug))
+    latest.map((article: VerifyArticle) => verifyArticleByIdOrSlug(article.slug))
   );
 
   return (

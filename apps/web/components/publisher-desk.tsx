@@ -56,7 +56,7 @@ const ZERO_HASH =
 function splitLinks(raw: string) {
   return raw
     .split("\n")
-    .map((entry) => entry.trim())
+    .map((entry: string) => entry.trim())
     .filter(Boolean);
 }
 
@@ -347,7 +347,7 @@ export function PublisherDesk({
             {articles.length === 0 ? (
               <div className="empty-state">No drafts or publications yet. Save one to begin your revision chain.</div>
             ) : (
-              articles.map((article) => (
+              articles.map((article: DeskArticle) => (
                 <article key={article.id} className="timeline-card panel">
                   <div className="pill-row">
                     <span className={`pill ${article.status === "PUBLISHED" ? "ok" : "warn"}`}>{article.status}</span>

@@ -64,7 +64,7 @@ export default async function ArticlePage({
             {String(currentContent.body ?? "")
               .split("\n")
               .filter(Boolean)
-              .map((paragraph) => (
+              .map((paragraph: string) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
           </div>
@@ -77,7 +77,7 @@ export default async function ArticlePage({
             </h2>
           </header>
           <div className="timeline">
-            {revisions.map((revision) => (
+            {revisions.map((revision: (typeof revisions)[number]) => (
               <article key={revision.id} className="timeline-card panel">
                 <div className="pill-row">
                   <span className="pill">rev {revision.revisionNumber}</span>
