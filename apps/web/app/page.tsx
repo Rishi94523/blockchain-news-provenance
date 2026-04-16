@@ -6,6 +6,11 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const articles = await getPublishedArticles();
+  const totalRevisions = articles.reduce(
+    (sum: number, article: (typeof articles)[number]) =>
+      sum + article.revisions.length,
+    0
+  );
 
   return (
     <div className="section">
@@ -32,7 +37,7 @@ export default async function HomePage() {
               <span className="muted">Tracked publications</span>
             </div>
             <div className="stat">
-              <strong>{articles.reduce((sum, article) => sum + article.revisions.length, 0)}</strong>
+              <strong>{totalRevisions}</strong>
               <span className="muted">Anchored revisions</span>
             </div>
             <div className="stat">
