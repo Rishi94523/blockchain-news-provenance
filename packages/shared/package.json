@@ -1,0 +1,20 @@
+{
+  "name": "@news-provenance/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "viem": "^2.23.5",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1"
+  }
+}

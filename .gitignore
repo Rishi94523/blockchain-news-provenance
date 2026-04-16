@@ -1,0 +1,14 @@
+node_modules
+.next
+dist
+coverage
+.turbo
+.codex-runtime
+.env
+.env.local
+*.tsbuildinfo
+artifacts
+cache
+typechain-types
+generated
+prisma/dev.db

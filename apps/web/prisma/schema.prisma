@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum PublisherStatus {
+  APPROVED
+  REVOKED
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Publisher {
+  id            String          @id
+  displayName   String
+  walletAddress String          @unique
+  status        PublisherStatus @default(APPROVED)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  articles      Article[]
+}
+
+model Article {
+  id              String        @id @default(uuid())
+  slug            String        @unique
+  externalId      String        @unique
+  chainArticleId  BigInt?       @unique
+  publisherId     String
+  title           String
+  status          ArticleStatus @default(DRAFT)
+  currentRevision Int           @default(0)
+  draftContent    Json?
+  publishedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  publisher       Publisher     @relation(fields: [publisherId], references: [id])
+  revisions       Revision[]
+}
+
+model Revision {
+  id             String   @id @default(uuid())
+  articleId      String
+  revisionNumber Int
+  contentJson    Json
+  contentHash    String
+  previousHash   String
+  changeNote     String
+  editorWallet   String
+  txHash         String   @unique
+  blockNumber    BigInt
+  createdAt      DateTime @default(now())
+  article        Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@unique([articleId, revisionNumber])
+}
+
+model ChainEvent {
+  id         String   @id @default(cuid())
+  eventName  String
+  articleId  BigInt?
+  txHash     String
+  blockNumber BigInt
+  logIndex   Int
+  payload    Json
+  createdAt  DateTime @default(now())
+
+  @@unique([txHash, logIndex])
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@news-provenance/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init"
+  },
+  "dependencies": {
+    "@news-provenance/shared": "*",
+    "@prisma/client": "^6.5.0",
+    "jose": "^6.0.10",
+    "next": "^15.2.2",
+    "prisma": "^6.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "siwe": "^3.0.0",
+    "viem": "^2.23.5",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "@types/react": "^19.0.11",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "^5.8.2"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "blockchain-news-provenance",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @news-provenance/web",
+    "build": "npm run build --workspace @news-provenance/shared && npm run build --workspace @news-provenance/web",
+    "lint": "npm run lint --workspace @news-provenance/web",
+    "test": "npm run test --workspace @news-provenance/shared && npm run test --workspace @news-provenance/contracts",
+    "contracts:compile": "npm run compile --workspace @news-provenance/contracts",
+    "contracts:test": "npm run test --workspace @news-provenance/contracts",
+    "indexer": "npm run dev --workspace @news-provenance/indexer"
+  }
+}
