@@ -33,6 +33,14 @@ export default async function ArticlePage({
   const verification = await verifyArticleByIdOrSlug(article.slug);
   const current = article.revisions[0];
   const serialized = toJsonSafe(article);
+  const revisions = serialized.revisions as unknown as Array<{
+    id: string;
+    revisionNumber: number;
+    createdAt: string;
+    changeNote: string;
+    contentHash: string;
+    txHash: string;
+  }>;
   const currentContent = (current?.contentJson ?? {}) as {
     summary?: string;
     body?: string;
@@ -69,7 +77,7 @@ export default async function ArticlePage({
             </h2>
           </header>
           <div className="timeline">
-            {serialized.revisions.map((revision) => (
+            {revisions.map((revision) => (
               <article key={revision.id} className="timeline-card panel">
                 <div className="pill-row">
                   <span className="pill">rev {revision.revisionNumber}</span>
