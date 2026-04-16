@@ -6,11 +6,14 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const articles = await getPublishedArticles();
+  type HomeArticle = Awaited<ReturnType<typeof getPublishedArticles>>[number];
   const totalRevisions = articles.reduce(
-    (sum: number, article: (typeof articles)[number]) =>
-      sum + article.revisions.length,
+    (sum: number, article: HomeArticle) => sum + article.revisions.length,
     0
   );
+  const uniquePublisherCount = new Set(
+    articles.map((article: HomeArticle) => article.publisherId)
+  ).size;
 
   return (
     <div className="section">
@@ -41,7 +44,7 @@ export default async function HomePage() {
               <span className="muted">Anchored revisions</span>
             </div>
             <div className="stat">
-              <strong>{new Set(articles.map((article) => article.publisherId)).size}</strong>
+              <strong>{uniquePublisherCount}</strong>
               <span className="muted">Verified publishers</span>
             </div>
           </div>
@@ -75,7 +78,7 @@ export default async function HomePage() {
               No published stories yet. Approve a publisher, sign in, save a draft, then publish the first ledger-backed article.
             </div>
           ) : (
-            articles.map((article) => (
+            articles.map((article: HomeArticle) => (
               <article key={article.id} className="panel story-card">
                 <header>
                   <div className="pill-row">
